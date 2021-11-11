@@ -40,7 +40,7 @@ func (a APIObjectVersioner) UpdateObject(obj runtime.Object, resourceVersion uin
 	if resourceVersion != 0 {
 		versionString = strconv.FormatUint(resourceVersion, 10)
 	}
-	accessor.SetResourceVersion(versionString)
+	accessor.SetResourceVersion(versionString) // mod_revision
 	return nil
 }
 

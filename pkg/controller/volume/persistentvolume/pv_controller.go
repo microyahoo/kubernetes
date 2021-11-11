@@ -1307,7 +1307,7 @@ func (ctrl *PersistentVolumeController) deleteVolumeOperation(volume *v1.Persist
 func (ctrl *PersistentVolumeController) isVolumeReleased(volume *v1.PersistentVolume) (bool, error) {
 	// A volume needs reclaim if it has ClaimRef and appropriate claim does not
 	// exist.
-	if volume.Spec.ClaimRef == nil {
+	if volume.Spec.ClaimRef == nil { // sure?
 		klog.V(4).Infof("isVolumeReleased[%s]: ClaimRef is nil", volume.Name)
 		return false, nil
 	}
@@ -1377,7 +1377,7 @@ func (ctrl *PersistentVolumeController) isVolumeUsed(pv *v1.PersistentVolume) ([
 		return nil, false, fmt.Errorf("error finding pods by pvc %q: %s", pvcKey, err)
 	}
 	for _, pod := range pods {
-		if util.IsPodTerminated(pod, pod.Status) {
+		if util.IsPodTerminated(pod, pod.Status) { // why?
 			continue
 		}
 		podNames.Insert(pod.Namespace + "/" + pod.Name)

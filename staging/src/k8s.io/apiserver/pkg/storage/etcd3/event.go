@@ -18,6 +18,7 @@ package etcd3
 
 import (
 	"fmt"
+
 	"go.etcd.io/etcd/api/v3/mvccpb"
 	clientv3 "go.etcd.io/etcd/client/v3"
 )
@@ -53,7 +54,7 @@ func parseEvent(e *clientv3.Event) (*event, error) {
 	ret := &event{
 		key:       string(e.Kv.Key),
 		value:     e.Kv.Value,
-		rev:       e.Kv.ModRevision,
+		rev:       e.Kv.ModRevision, // rev对应的是mod_revision
 		isDeleted: e.Type == clientv3.EventTypeDelete,
 		isCreated: e.IsCreate(),
 	}

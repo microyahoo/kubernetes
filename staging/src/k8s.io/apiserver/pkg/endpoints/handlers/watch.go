@@ -212,7 +212,7 @@ func (s *WatchServer) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 			return
 		case <-timeoutCh:
 			return
-		case event, ok := <-ch:
+		case event, ok := <-ch: // handle watch events
 			if !ok {
 				// End of results.
 				return
